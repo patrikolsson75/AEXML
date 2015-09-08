@@ -25,9 +25,10 @@ class AEXMLTests: XCTestCase {
         // parse xml file
         if let xmlPath = NSBundle.mainBundle().pathForResource(filename, ofType: "xml") {
             if let data = NSData(contentsOfFile: xmlPath) {
-                var error: NSError?
-                if let xmlDoc = AEXMLDocument(xmlData: data, error: &error) {
+                do {
+                    let xmlDoc = try AEXMLDocument(xmlData: data)
                     xmlDocument = xmlDoc
+                } catch _ {
                 }
             }
         }
